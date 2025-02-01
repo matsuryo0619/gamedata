@@ -1,19 +1,41 @@
-const sprictTag = document.querySelector('script[src="fileload.js"]');
-const cssFiles = JSON.parse(scriptTag.dataset.cssFiles || "[]");
-const jsFiles = JSON.parse(scriptTag.dataset.jsFiles || "[]");
+const scriptTag = document.querySelector('script[src="fileload.js"]');
 
-//CSS読み込み
-cssFiles.forEach(file => {
-  const link = document.createElement('link');
-  link.rel = "stylesheet";
-  link.href = file;
-  document.head.appendChild(link);
-});
+if (scriptTag) {
+  const cssFiles = JSON.parse(scriptTag.dataset.cssFiles || "[]");
+  const jsFiles = JSON.parse(scriptTag.dataset.jsFiles || "[]");
 
-//JS読み込み
-jsFiles.forEach(file => {
-  const script = document.createElement('script');
-  script.src = file.src;
-  if (file.defer) script.defer = "true";
-  document.body.appendChild(script);
-});
+  loadCSSFiles(cssFiles);
+  loadJSFiles(jsFiles);
+} else {
+  console.warn("fileload.js の <script> タグが見つかりません。");
+}
+
+// CSS を読み込む関数
+function loadCSSFiles(files) {
+  files.forEach(file => {
+    const link = document.createElement('link');
+    link.rel = "stylesheet";
+    link.href = file;
+    document.head.appendChild(link);
+  });
+}
+
+// JS を読み込む関数
+function loadJSFiles(files) {
+  files.forEach(file => {
+    const script = document.createElement('script');
+    script.src = file.src;
+    if (file.defer) script.defer = true;
+    document.body.appendChild(script);
+  });
+}
+
+// 必須ファイル
+const css_requiredFiles = ["main.css"];
+const js_requiredFiles = [
+  { src: "main.js", defer: true }
+];
+
+// 必須ファイルも読み込む
+loadCSSFiles(css_requiredFiles);
+loadJSFiles(js_requiredFiles);

@@ -15,7 +15,7 @@ function loadCSSFiles(files) {
   files.forEach(file => {
     const link = document.createElement('link');
     link.rel = "stylesheet";
-    link.href = file;  // 変更: 直接ファイル名を使用
+    link.href = file;  // 修正: 直接ファイル名を渡す
     document.head.appendChild(link);
   });
 }
@@ -24,7 +24,7 @@ function loadCSSFiles(files) {
 function loadJSFiles(files) {
   files.forEach(file => {
     const script = document.createElement('script');
-    script.src = file.src;  // file.src を正しく使用
+    script.src = file.src;  // file.src を正しく指定
     if (file.defer) script.defer = true;
     document.body.appendChild(script);
   });

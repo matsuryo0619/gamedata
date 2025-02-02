@@ -1,9 +1,3 @@
-// CSSの読み込み
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'mouse.css';
-document.head.appendChild(link);
-
 // 要素の生成と設定
 const positionDiv = document.createElement('div');
 positionDiv.id = 'position';
@@ -41,6 +35,7 @@ fetch('contextmenu.json')
                     case 'reset':
                         positionDiv.style.left = '5px';
                         positionDiv.style.top = '5px';
+                        document.documentElement.style.cursor = 'default'; // カーソルをデフォルトに戻す
                         break;
                     case 'settings':
                         // サブメニューが存在する場合
@@ -57,6 +52,9 @@ fetch('contextmenu.json')
                                 submenu.appendChild(subDiv);
                             });
                             div.appendChild(submenu); // メニュー項目にサブメニューを追加
+                            const rect = div.getBoundingClientRect();
+                            submenu.style.top = `${rect.height}px`; // 親メニュー項目の高さ分下に移動
+                            submenu.style.left = 0; // 親メニュー項目の左端に配置
                             submenu.style.display = 'block'; // サブメニューを表示
                         }
                         let rect = div.getBoundingClientRect();
@@ -151,29 +149,8 @@ document.addEventListener('mousedown', (e) => {
     }
 });
 
-// mouseSettingsButton.addEventListener('mouseenter', (e) => { // 不要
-//     let rect = mouseSettingsButton.getBoundingClientRect();
-//     mouseSettingsMenu.style.left = `${rect.right - 5}px`; // 右クリメニューに少し被せる
-//     mouseSettingsMenu.style.top = `${rect.top}px`;
-//     mouseSettingsMenu.classList.add('visible');
-// });
-
-
-// mouseSettingsButton.addEventListener('mouseleave', (e) => { // 不要
-//     setTimeout(() => {
-//         if (!mouseSettingsMenu.matches(':hover')) {
-//             mouseSettingsMenu.classList.remove('visible');
-//         }
-//     }, 200);
-// });
-
-mouseSettingsMenu.addEventListener('mouseleave', () => {
-    mouseSettingsMenu.classList.remove('visible');
-});
-
-// resetButton.addEventListener('click', () => { // 不要
-//     position.style.left = '5px';
-//     position.style.top = '5px';
+// mouseSettingsMenu.addEventListener('mouseleave', () => { // 不要
+//     mouseSettingsMenu.classList.remove('visible');
 // });
 
 const mouseOptions = document.querySelectorAll('.mouse-settings-menu .mouse-option'); // mouse-settings-menu 内の要素を取得

@@ -1,0 +1,4 @@
+[
+    { "label": "元の位置へ", "action": "reset"},
+    { "label": "マウス設定", "action": "settings"}
+]

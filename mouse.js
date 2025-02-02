@@ -1,3 +1,9 @@
+//CSSの読み込み
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = 'mouse.css'; // CSSファイルのパス
+document.head.appendChild(link);
+
 // 要素の生成と設定
 const positionDiv = document.createElement('div');
 positionDiv.id = 'position';

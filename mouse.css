@@ -89,3 +89,32 @@ body {
 .mouse-option:hover {
     background-color: #e0e0e0;
 }
+
+/* サブメニュー */
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%; /* 親メニュー項目の右側に表示 */
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    border-radius: 10px;
+    display: none; /* 最初は非表示 */
+    min-width: 100%; /* サブメニューの最小幅 */
+}
+
+.contextmenu div:hover .submenu {
+    display: block; /* 親メニュー項目にhoverしたら表示 */
+}
+
+.submenu div {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s ease-in-out;
+}
+
+.submenu div:hover {
+    background: #e0e0e0;
+}
